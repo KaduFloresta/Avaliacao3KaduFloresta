@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 // import java.util.Objects;
@@ -9,6 +11,8 @@ public class Pessoas {
     private int idPessoa;
     private String nomePessoa;
     private String emailPessoa;
+    private List<Dividas> dividas = new ArrayList<>();
+    private List<Proventos> proventos = new ArrayList<>();
 
     public Pessoas() {
     }
