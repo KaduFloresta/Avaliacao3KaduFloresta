@@ -11,7 +11,6 @@ public class Contas {
     private int ano;
     private Double valor;
 
-
     public Contas() {
     }
 
@@ -82,14 +81,14 @@ public class Contas {
             return false;
         }
         Contas contas = (Contas) o;
-        return idConta == contas.idConta && mes == contas.mes && ano == contas.ano && Objects.equals(valor, contas.valor);
+        return idConta == contas.idConta && mes == contas.mes && ano == contas.ano
+                && Objects.equals(valor, contas.valor);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idConta, mes, ano, valor);
     }
-
     @Override
     public String toString() {
         return "{" +

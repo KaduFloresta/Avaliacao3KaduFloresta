@@ -70,14 +70,14 @@ public class Pessoas {
             return false;
         }
         Pessoas pessoas = (Pessoas) o;
-        return idPessoa == pessoas.idPessoa && Objects.equals(nomePessoa, pessoas.nomePessoa) && Objects.equals(emailPessoa, pessoas.emailPessoa);
+        return idPessoa == pessoas.idPessoa && Objects.equals(nomePessoa, pessoas.nomePessoa)
+                && Objects.equals(emailPessoa, pessoas.emailPessoa);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idPessoa, nomePessoa, emailPessoa);
     }
-
     @Override
     public String toString() {
         return "{" +
@@ -86,6 +86,4 @@ public class Pessoas {
             ", emailPessoa='" + getEmailPessoa() + "'" +
             "}";
     }
-
-
 }

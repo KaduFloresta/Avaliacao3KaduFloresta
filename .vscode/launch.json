@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - TestaConexao",
+            "request": "launch",
+            "mainClass": "app.TestaConexao",
+            "projectName": "avaliacaotres"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - JButtonExemplo",
             "request": "launch",
             "mainClass": "app.JButtonExemplo",
