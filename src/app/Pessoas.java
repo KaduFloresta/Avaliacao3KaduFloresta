@@ -31,8 +31,15 @@ public class Pessoas {
 
         UsuarioDAO dao = new UsuarioDAO();
         dao.adicionaPessoa(this);
-        dao.endConection();
-        
+        dao.endConection();        
+    }
+
+    public Pessoas(int idPessoa, String nomePessoa, String emailPessoa, List<Dividas> dividas, List<Proventos> proventos) {
+        this.idPessoa = idPessoa;
+        this.nomePessoa = nomePessoa;
+        this.emailPessoa = emailPessoa;
+        this.dividas = dividas;
+        this.proventos = proventos;
     }
 
     public int getIdPessoa() {
@@ -59,6 +66,22 @@ public class Pessoas {
         this.emailPessoa = emailPessoa;
     }
 
+    public List<Dividas> getDividas() {
+        return this.dividas;
+    }
+
+    public void setDividas(List<Dividas> dividas) {
+        this.dividas = dividas;
+    }
+
+    public List<Proventos> getProventos() {
+        return this.proventos;
+    }
+
+    public void setProventos(List<Proventos> proventos) {
+        this.proventos = proventos;
+    }
+
     public Pessoas idPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
         return this;
@@ -74,6 +97,16 @@ public class Pessoas {
         return this;
     }
 
+    public Pessoas dividas(List<Dividas> dividas) {
+        this.dividas = dividas;
+        return this;
+    }
+
+    public Pessoas proventos(List<Proventos> proventos) {
+        this.proventos = proventos;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -82,20 +115,23 @@ public class Pessoas {
             return false;
         }
         Pessoas pessoas = (Pessoas) o;
-        return idPessoa == pessoas.idPessoa && Objects.equals(nomePessoa, pessoas.nomePessoa)
-                && Objects.equals(emailPessoa, pessoas.emailPessoa);
+        return idPessoa == pessoas.idPessoa && Objects.equals(nomePessoa, pessoas.nomePessoa) && Objects.equals(emailPessoa, pessoas.emailPessoa) && Objects.equals(dividas, pessoas.dividas) && Objects.equals(proventos, pessoas.proventos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPessoa, nomePessoa, emailPessoa);
+        return Objects.hash(idPessoa, nomePessoa, emailPessoa, dividas, proventos);
     }
+
     @Override
     public String toString() {
         return "{" +
             " idPessoa='" + getIdPessoa() + "'" +
             ", nomePessoa='" + getNomePessoa() + "'" +
             ", emailPessoa='" + getEmailPessoa() + "'" +
+            ", dividas='" + getDividas() + "'" +
+            ", proventos='" + getProventos() + "'" +
             "}";
     }
+
 }

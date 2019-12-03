@@ -10,10 +10,6 @@ public class Financeiro {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        Map<Integer, Pessoas> pessoas = new HashMap<>();
-        Map<Integer, Proventos> proventos = new HashMap<>();
-        Map<Integer, Dividas> dividas = new HashMap<>();
-
         Connection connection = new ConnectionX().getConnection();
 
         System.out.println("...:::[FINANCEIRO]:::...");
@@ -57,7 +53,7 @@ public class Financeiro {
         System.out.println("5 >>> Sair");
     }
 
-    private static void cadastrarPessoas(Scanner scanner, Map<Integer, Pessoas> pessoas) {
+    private static void cadastrarPessoas(Scanner scanner) {
 
         System.out.println("Digite o Nome: ");
         String nome = scanner.next();
@@ -66,7 +62,7 @@ public class Financeiro {
         Pessoas pessoa = new Pessoas(nome, email);
     }
 
-    private static void cadastrarProventos(Scanner scanner, Map<Integer, Proventos> proventos) {
+    private static void cadastrarProventos(Scanner scanner) {
 
         System.out.println("Digite o Mes: ");
         int mes = scanner.nextInt();
@@ -79,7 +75,7 @@ public class Financeiro {
         Proventos provento = new Proventos(mes, ano, valor, imposto);
     }
 
-    private static void cadastrarDividas(Scanner scanner, Map<Integer, Dividas> dividas) {
+    private static void cadastrarDividas(Scanner scanner) {
 
         System.out.println("Digite o Mes: ");
         int mes = scanner.nextInt();
@@ -89,11 +85,7 @@ public class Financeiro {
         double valor = scanner.nextDouble();
         System.out.println("Digite o % do Imposto: ");
         double percDesconto = scanner.nextDouble();
-		Dividas divida = new Dividas(mes, ano, ano, valor, percDesconto);
+        Dividas divida = new Dividas(mes, ano, ano, valor, percDesconto);
     }
-    // private static void consultarConta(Map<Integer,Pessoas> pessoas, Scanner scanner){
-    //     Pessoas pessoa = (Pessoas) retornaObjeto(pessoas, "Digite o código do cliente: ", scanner);
-    //     pessoa.consultarConta();
-    // }
 
 }
