@@ -7,7 +7,7 @@ import java.sql.SQLException; //Tratamento de Exceções
 public class ConnectionX {
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/contas","root","");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/contas?useTimezone=true&serverTimezone=UTC","root","");
         }
         catch(SQLException excecao) {
             throw new RuntimeException(excecao);

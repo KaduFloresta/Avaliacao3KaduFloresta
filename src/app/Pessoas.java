@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import app.dao.UsuarioDAO;
+
 // import java.util.Objects;
 
 public class Pessoas {
@@ -21,6 +23,16 @@ public class Pessoas {
         this.idPessoa = idPessoa;
         this.nomePessoa = nomePessoa;
         this.emailPessoa = emailPessoa;
+    }
+
+    public Pessoas(String nomePessoa, String emailPessoa){
+        this.nomePessoa = nomePessoa;
+        this.emailPessoa = emailPessoa;
+
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.adicionaPessoa(this);
+        dao.endConection();
+        
     }
 
     public int getIdPessoa() {

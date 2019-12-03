@@ -2,15 +2,15 @@ package app;
 
 import java.util.Objects;
 
-public class Dividas extends Pessoas {
+public class Dividas extends Contas {
 
     private double percDesconto;
 
     public Dividas() {
     }
 
-    public Dividas(int idPessoa, String nomePessoa, String emailPessoa, double percDesconto) {
-        super(idPessoa, nomePessoa, emailPessoa);
+    public Dividas(int idConta, int mes, int ano, double valor, double percDesconto) {
+        super(idConta, mes, ano, valor);
         this.percDesconto = percDesconto;
     }
 
@@ -42,12 +42,10 @@ public class Dividas extends Pessoas {
     public int hashCode() {
         return Objects.hashCode(percDesconto);
     }
-
     @Override
     public String toString() {
         return "{" +
             " percDesconto='" + getPercDesconto() + "'" +
             "}";
     }
-
 }

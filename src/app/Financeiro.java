@@ -1,16 +1,18 @@
 package app;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import javax.swing.JTextField;
-
 public class Financeiro {
-    private static Map<Integer, Pessoas> pessoas2;
 
     public static void main(String[] args) throws Exception {
-        Scanner entrada = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+
+        Map<Integer, Pessoas> pessoas = new HashMap<>();
+        Map<Integer, Proventos> proventos = new HashMap<>();
+        Map<Integer, Dividas> dividas = new HashMap<>();
 
         Connection connection = new ConnectionX().getConnection();
 
@@ -19,46 +21,79 @@ public class Financeiro {
         int opcao = 0;
         do {
             imprimirOpcoes();
-            opcao = entrada.nextInt();
+            opcao = scanner.nextInt();
             switch (opcao) {
             case 1:
-                // cadastrarPessoas(entrada, pessoas);
+                cadastrarPessoas(scanner, pessoas);
                 break;
             case 2:
-                // consultarPessoas(entrada, funcionarios);
+                cadastrarProventos(scanner, proventos);
                 break;
             case 3:
-                System.out.println("Até a Pŕoxima!");
+                cadastrarDividas(scanner, dividas);
+                break;
+            case 4:
+                // consultarConta(scanner, contas);
+                break;
+            case 5:
+                System.out.println("OBRIGADO!");
                 break;
             default:
-                System.out.println("Opção Inválida");
+                System.out.println("OÇÃO INVÁLIDA!");
                 break;
             }
 
         } while (opcao != 3);
 
-        entrada.close();
+        scanner.close();
     }
 
     private static void imprimirOpcoes() {
         System.out.println("Escolha a Opção: ");
         System.out.println("1 >>> Cadastrar Cliente");
-        System.out.println("2 >>> Consultar Conta");
-        System.out.println("3 >>> Sair");
+        System.out.println("2 >>> Cadastrar Proventos");
+        System.out.println("3 >>> Cadastrar Dividas");
+        System.out.println("4 >>> Consultar Conta");
+        System.out.println("5 >>> Sair");
     }
 
-    private static void cadastrarPessoas(Scanner entrada, Map<Integer, Pessoas> pessoas) {
-        Pessoas pessoa = new Pessoas();
+    private static void cadastrarPessoas(Scanner scanner, Map<Integer, Pessoas> pessoas) {
 
-        System.out.println("Digite o ID: ");       
-        System.out.println("Digite o Nome: ");        
-        System.out.println("Digite o Email: ");        
-        System.out.println("Digite o Mês: ");        
+        System.out.println("Digite o Nome: ");
+        String nome = scanner.next();
+        System.out.println("Digite o Email: ");
+        String email = scanner.next();
+        Pessoas pessoa = new Pessoas(nome, email);
+    }
+
+    private static void cadastrarProventos(Scanner scanner, Map<Integer, Proventos> proventos) {
+
+        System.out.println("Digite o Mes: ");
+        int mes = scanner.nextInt();
         System.out.println("Digite o Ano: ");
+        int ano = scanner.nextInt();
         System.out.println("Digite o Valor: ");
-        System.out.println("Digite o Desconto: ");
-        
-
-        pessoas.put(pessoas.size(), pessoa);
+        double valor = scanner.nextDouble();
+        System.out.println("Digite o Imposto: ");
+        double imposto = scanner.nextDouble();
+        Proventos provento = new Proventos(mes, ano, valor, imposto);
     }
+
+    private static void cadastrarDividas(Scanner scanner, Map<Integer, Dividas> dividas) {
+
+        System.out.println("Digite o Mes: ");
+        int mes = scanner.nextInt();
+        System.out.println("Digite o Ano: ");
+        int ano = scanner.nextInt();
+        System.out.println("Digite o Valor: ");
+        double valor = scanner.nextDouble();
+        System.out.println("Digite o % do Imposto: ");
+        double percDesconto = scanner.nextDouble();
+		Dividas divida = new Dividas(mes, ano, ano, valor, percDesconto);
+    }
+    // private static void consultarConta(Map<Integer,Pessoas> pessoas, Scanner scanner){
+    //     Pessoas pessoa = (Pessoas) retornaObjeto(pessoas, "Digite o código do cliente: ", scanner);
+    //     pessoa.consultarConta();
+    // }
+
 }

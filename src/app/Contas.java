@@ -9,7 +9,7 @@ public class Contas {
     private int idConta;
     private int mes;
     private int ano;
-    private Double valor;
+    private double valor;
 
     public Contas() {
     }

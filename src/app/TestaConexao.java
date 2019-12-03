@@ -5,11 +5,11 @@ import java.sql.SQLException;
 
 public class TestaConexao {
 
-public static void main(String[] args) throws SQLException{
- Connection connection = new ConnectionX().getConnection();
- 
- System.out.println("Conexão Aberta!");
- connection.close();
+    public static void main(String[] args) throws SQLException {
+        Connection connection = new ConnectionX().getConnection();
+
+        System.out.println("Conexão Aberta!");
+        connection.close();
 
     }
 }
