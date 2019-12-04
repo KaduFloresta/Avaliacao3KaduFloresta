@@ -1,22 +1,27 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import app.dao.UsuarioDAO;
-
-// import java.util.Objects;
 
 public class Pessoas {
 
     private int idPessoa;
     private String nomePessoa;
     private String emailPessoa;
-    private List<Dividas> dividas = new ArrayList<>();
-    private List<Proventos> proventos = new ArrayList<>();
 
+    /* Métodos / Construtores
+        + Pessoa(): Pessoas 
+        + Pessoa(id: int): Pessoas 
+        + Pessoa(id: int, nome: String, email: String): Pessoas 
+        + Pessoa(nome: String, email: String): Pessoas 
+        + Pessoas(): Set<Pessoas>
+    */    
     public Pessoas() {
+    }
+
+    public Pessoas(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public Pessoas(int idPessoa, String nomePessoa, String emailPessoa) {
@@ -34,18 +39,29 @@ public class Pessoas {
         dao.endConection();        
     }
 
-    public Pessoas(int idPessoa, String nomePessoa, String emailPessoa, List<Dividas> dividas, List<Proventos> proventos) {
-        this.idPessoa = idPessoa;
-        this.nomePessoa = nomePessoa;
-        this.emailPessoa = emailPessoa;
-        this.dividas = dividas;
-        this.proventos = proventos;
+    public static void getPessoas(){
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.getPessoas();
+        dao.endConection();
     }
 
+    public static Pessoas getPessoa(int idPessoa){
+        UsuarioDAO dao = new UsuarioDAO();
+        Pessoas pessoa = dao.getPessoa(idPessoa);
+        dao.endConection();
+        return pessoa;
+    }
+    /* Métodos Get - Set 
+        + getId(): int 
+        + setId(id: int): void 
+        + getNome(): String 
+        + setNome(nome: String): void 
+        + getEmail(): String 
+        + setEmail(email: String):  void 
+    */
     public int getIdPessoa() {
         return this.idPessoa;
     }
-
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
@@ -53,7 +69,6 @@ public class Pessoas {
     public String getNomePessoa() {
         return this.nomePessoa;
     }
-
     public void setNomePessoa(String nomePessoa) {
         this.nomePessoa = nomePessoa;
     }
@@ -61,25 +76,8 @@ public class Pessoas {
     public String getEmailPessoa() {
         return this.emailPessoa;
     }
-
     public void setEmailPessoa(String emailPessoa) {
         this.emailPessoa = emailPessoa;
-    }
-
-    public List<Dividas> getDividas() {
-        return this.dividas;
-    }
-
-    public void setDividas(List<Dividas> dividas) {
-        this.dividas = dividas;
-    }
-
-    public List<Proventos> getProventos() {
-        return this.proventos;
-    }
-
-    public void setProventos(List<Proventos> proventos) {
-        this.proventos = proventos;
     }
 
     public Pessoas idPessoa(int idPessoa) {
@@ -97,16 +95,11 @@ public class Pessoas {
         return this;
     }
 
-    public Pessoas dividas(List<Dividas> dividas) {
-        this.dividas = dividas;
-        return this;
-    }
-
-    public Pessoas proventos(List<Proventos> proventos) {
-        this.proventos = proventos;
-        return this;
-    }
-
+    /* Métodos Equals - Hashcode - ToString 
+        + equals(o: Object): boolean 
+        + hashCode(): int 
+        + toString(): String
+    */
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -115,23 +108,21 @@ public class Pessoas {
             return false;
         }
         Pessoas pessoas = (Pessoas) o;
-        return idPessoa == pessoas.idPessoa && Objects.equals(nomePessoa, pessoas.nomePessoa) && Objects.equals(emailPessoa, pessoas.emailPessoa) && Objects.equals(dividas, pessoas.dividas) && Objects.equals(proventos, pessoas.proventos);
+        return idPessoa == pessoas.idPessoa && Objects.equals(nomePessoa, pessoas.nomePessoa) && Objects.equals(emailPessoa, pessoas.emailPessoa);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPessoa, nomePessoa, emailPessoa, dividas, proventos);
+        return Objects.hash(idPessoa, nomePessoa, emailPessoa);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " idPessoa='" + getIdPessoa() + "'" +
-            ", nomePessoa='" + getNomePessoa() + "'" +
-            ", emailPessoa='" + getEmailPessoa() + "'" +
-            ", dividas='" + getDividas() + "'" +
-            ", proventos='" + getProventos() + "'" +
-            "}";
+        return "Id: " + getIdPessoa() + "\n" +
+            "Nome: " + getNomePessoa() + "\n" +
+            "Email:" + getEmailPessoa() + "\n" +
+            "------------------------------------";
     }
+    
 
 }

@@ -20,18 +20,24 @@ public class Financeiro {
             opcao = scanner.nextInt();
             switch (opcao) {
             case 1:
-                cadastrarPessoas(scanner, pessoas);
+                cadastrarPessoas(scanner);
                 break;
             case 2:
-                cadastrarProventos(scanner, proventos);
+                cadastrarProventos(scanner);
                 break;
             case 3:
-                cadastrarDividas(scanner, dividas);
+                cadastrarDividas(scanner);
                 break;
             case 4:
-                // consultarConta(scanner, contas);
+                consultarPessoas(scanner);
                 break;
             case 5:
+                consultarDividas(scanner);
+                break;
+            case 6:
+                // consultarProventos(scanner);
+                break;
+            case 7:
                 System.out.println("OBRIGADO!");
                 break;
             default:
@@ -39,17 +45,19 @@ public class Financeiro {
                 break;
             }
 
-        } while (opcao != 3);
+        } while (opcao != 7);
 
         scanner.close();
     }
 
     private static void imprimirOpcoes() {
         System.out.println("Escolha a Opção: ");
-        System.out.println("1 >>> Cadastrar Cliente");
+        System.out.println("1 >>> Cadastrar Pessoa");
         System.out.println("2 >>> Cadastrar Proventos");
         System.out.println("3 >>> Cadastrar Dividas");
-        System.out.println("4 >>> Consultar Conta");
+        System.out.println("4 >>> Consultar Pessoas");
+        System.out.println("4 >>> Consultar Proventos");
+        System.out.println("4 >>> Consultar Dividas");
         System.out.println("5 >>> Sair");
     }
 
@@ -63,7 +71,9 @@ public class Financeiro {
     }
 
     private static void cadastrarProventos(Scanner scanner) {
-
+        System.out.println("Digite o Id da Pessoa: ");
+        int idPessoa = scanner.nextInt();
+        Pessoas pessoa = Pessoas.getPessoa(idPessoa);
         System.out.println("Digite o Mes: ");
         int mes = scanner.nextInt();
         System.out.println("Digite o Ano: ");
@@ -72,7 +82,7 @@ public class Financeiro {
         double valor = scanner.nextDouble();
         System.out.println("Digite o Imposto: ");
         double imposto = scanner.nextDouble();
-        Proventos provento = new Proventos(mes, ano, valor, imposto);
+        new Proventos(mes, ano, valor, pessoa, imposto);
     }
 
     private static void cadastrarDividas(Scanner scanner) {
@@ -85,7 +95,17 @@ public class Financeiro {
         double valor = scanner.nextDouble();
         System.out.println("Digite o % do Imposto: ");
         double percDesconto = scanner.nextDouble();
-        Dividas divida = new Dividas(mes, ano, ano, valor, percDesconto);
+        //Dividas divida = new Dividas(mes, ano, ano, valor, percDesconto);
+    }
+
+    private static void consultarPessoas(Scanner scanner) {
+        Pessoas.getPessoas();
+    }
+
+    private static void consultarDividas(Scanner scanner) {
+        System.out.println("Digite o Id da Pessoa: ");
+        int idPessoa = scanner.nextInt();
+        Dividas.getDividas(idPessoa);
     }
 
 }

@@ -1,26 +1,29 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Proventos extends Contas {
 
     private double imposto;
-    private List<Proventos> provento = new ArrayList<>();
 
-    public Proventos() {
-    }
-
-    public Proventos(int idConta, int mes, int ano, double valor, double imposto) {
-        super(idConta, mes, ano, valor);
+    /* Métodos / Construtores
+    + Proventos(id: int, mes: int, ano: int, valor: double, pessoa: Pessoas, imposto: double): Proventos 
+    + Proventos(mes: int, ano: int, valor: double, pessoa: Pessoas, imposto: double): Proventos 
+    + Proventos(idPessoa: int): Set<Proventos>
+    */   
+    public Proventos(int idConta, int mes, int ano, double valor, Pessoas pessoa, double imposto) {
+        super(idConta, mes, ano, valor, pessoa);
         this.imposto = imposto;
     }
 
-    public Proventos(int mes, int ano, double valor, double imposto) {
-        this(0, mes, ano, valor, imposto);
+    public Proventos(int mes, int ano, double valor, Pessoas pessoa, double imposto) {
+        this(0, mes, ano, valor, pessoa, imposto);
     }
 
+    /* Métodos Get - Set
+    + getImposto(): double 
+    + setImposto(imposto: double): void
+    */
     public Proventos(double imposto) {
         this.imposto = imposto;
     }
@@ -38,6 +41,10 @@ public class Proventos extends Contas {
         return this;
     }
 
+    /* Métodos Equals - Hashcode - ToString
+    + toString(): String 
+    - calculaImposto(): double
+    */
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -71,15 +78,11 @@ public class Proventos extends Contas {
     }
 
     private int quantidadeDeProventos() {
-        return this.provento.size();
+        return 0;
     }
 
     private void valorProventos(){
-        for(Proventos provento: this.provento){
-            System.out.print("Data da Provento: " + provento.getMes() + " " + provento.getAno());
-            System.out.print("Valor da Provento: " + provento.total() + "\n");
-            System.out.print("\n");
-        }
+        
     }
 
     private String total() {

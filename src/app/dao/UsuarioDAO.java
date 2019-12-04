@@ -2,7 +2,10 @@ package app.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import app.ConnectionX;
 import app.Dividas;
 import app.Pessoas;
@@ -25,12 +28,12 @@ public class UsuarioDAO {
     }
 
     public void adicionaPessoa(Pessoas pessoa) {
-        String sql = "INSERT INTO pessoas (idPessoa,nomePessoa,EmailPessoa) VALUES (?,?,?)";
+        String sql = "INSERT INTO pessoas (nome,email) VALUES (?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, pessoa.getIdPessoa());
-            stmt.setString(2, pessoa.getNomePessoa());
-            stmt.setString(3, pessoa.getEmailPessoa());
+            stmt.setString(1, pessoa.getNomePessoa());
+            stmt.setString(2, pessoa.getEmailPessoa());
+            stmt.execute();
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
@@ -38,7 +41,7 @@ public class UsuarioDAO {
     }
 
     public void adicionarProventos(Proventos provento){
-        String sql1 = "INSERT INTO proventos (idPessoa,mes,ano,valor,imposto) VALUES (?,?,?,?,?)";
+        String sql1 = "INSERT INTO proventos (pessoas_id,mes,ano,valor,imposto) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql1);
             stmt.setInt(1,provento.getIdConta());
@@ -52,7 +55,7 @@ public class UsuarioDAO {
     }
 
     public void adicionarDividas(Dividas divida){
-        String sql2 = "INSERT INTO dividas (idPessoa,mes,ano,valor,desconto) VALUES (?,?,?,?,?)";
+        String sql2 = "INSERT INTO dividas (pessoas_id,mes,ano,valor,desconto) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql2);
             stmt.setInt(1, divida.getIdConta());            
@@ -63,6 +66,71 @@ public class UsuarioDAO {
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
+    }
+
+    public Pessoas getPessoa(int idPessoa){
+        String sql = "SELECT * FROM pessoas WHERE id = " + idPessoa;
+        try{
+            Statement stmt = connection.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            if(resultSet.next()){
+                return new Pessoas(
+                    resultSet.getInt("id"), 
+                    resultSet.getString("nome"), 
+                    resultSet.getString("email"));
+            }
+
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+        return null;
+    }
+
+    public void getPessoas(){
+        String sql = "SELECT * FROM pessoas";
+        try{
+            Statement stmt = connection.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            while(resultSet.next()){
+                Pessoas pessoa = new Pessoas(
+                    resultSet.getInt("id"), 
+                    resultSet.getString("nome"), 
+                    resultSet.getString("email"));
+                
+                System.out.println(pessoa.toString());
+            }
+
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+    }
+
+    public Pessoas getDividas(int idPessoa){
+        String sql = "SELECT * FROM dividas WHERE pessoas_id = " + idPessoa;
+        try{
+            Statement stmt = connection.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            while(resultSet.next()){
+                Pessoas pessoa = getPessoa(resultSet.getInt("pessoas_id"));
+
+                Dividas divida = new Dividas(
+                    resultSet.getInt("id"),
+                    resultSet.getInt("mes"),
+                    resultSet.getInt("ano"),
+                    resultSet.getDouble("valor"),
+                    pessoa,
+                    resultSet.getDouble("percDesconto"));
+
+                System.out.println(divida.toString());
+            }
+
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+        return null;
     }
 
     public void endConection(){
