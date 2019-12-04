@@ -56,9 +56,9 @@ public class Financeiro {
         System.out.println("2 >>> Cadastrar Proventos");
         System.out.println("3 >>> Cadastrar Dividas");
         System.out.println("4 >>> Consultar Pessoas");
-        System.out.println("4 >>> Consultar Proventos");
-        System.out.println("4 >>> Consultar Dividas");
-        System.out.println("5 >>> Sair");
+        System.out.println("5 >>> Consultar Proventos");
+        System.out.println("6 >>> Consultar Dividas");
+        System.out.println("7 >>> Sair");
     }
 
     private static void cadastrarPessoas(Scanner scanner) {
