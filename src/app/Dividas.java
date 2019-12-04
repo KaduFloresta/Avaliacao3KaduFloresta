@@ -1,14 +1,17 @@
 package app;
 
+//Biblioteca
 import java.util.Set;
 
+//Biblioteca Interna
 import app.dao.UsuarioDAO;
 
+// Classe Derivada da Classe-Pai
 public class Dividas extends Contas {
-
+    // Variável Privada (Uso Exclusivo da Classe)
     private double percDesconto;
 
-    /*  Métodos / Construtores
+    /*  Construtores
         + Divida(id: int, mes: int, ano: int, valor: double, pessoa: Pessoas, percentualDesconto: double): Dividas 
         + Divida(mes: int, ano: int, valor: double, pessoa: Pessoas, percentualDesconto: double): Dividas 
         + Dividas(idPessoa: int): Set<Dividas>
@@ -56,9 +59,9 @@ public class Dividas extends Contas {
     */ 
     @Override
     public String toString() {
-        return "{" +
-            " percDesconto='" + getPercDesconto() + "'" +
-            "}";
+        return "Desconto na Dívida: " + getPercDesconto() + "\n" +
+        "Valor Com Desconto: " +
+        "-------------------------------------------";
     }
 
     /* Método Calculo Desconto da Divida

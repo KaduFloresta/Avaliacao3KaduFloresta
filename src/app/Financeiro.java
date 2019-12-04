@@ -1,24 +1,32 @@
 package app;
 
+/**
+ *  @author Kadu Floresta
+ * 
+ * 
+*/
+
+// Bibliotecas
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
+// Classe Principal
 public class Financeiro {
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-
+        // Conexão c/ o BD
         Connection connection = new ConnectionX().getConnection();
 
+        // Impressão do Cabeçalho no Console
         System.out.println("...:::[FINANCEIRO]:::...");
         System.out.println("Escolha a Opção: ");
         int opcao = 0;
         do {
+            // Impressão do Menu
             imprimirOpcoes();
             opcao = scanner.nextInt();
-            switch (opcao) {
+            switch (opcao) { 
             case 1:
                 cadastrarPessoas(scanner);
                 break;
@@ -35,21 +43,21 @@ public class Financeiro {
                 consultarDividas(scanner);
                 break;
             case 6:
-                // consultarProventos(scanner);
+                consultarProventos(scanner);
                 break;
             case 7:
+                // Encerra do Menu
                 System.out.println("OBRIGADO!");
                 break;
             default:
-                System.out.println("OÇÃO INVÁLIDA!");
+                // Inserção da "Chave" Inválida no Menu
+                System.out.println("OPÇÃO INVÁLIDA!");
                 break;
             }
-
         } while (opcao != 7);
-
         scanner.close();
     }
-
+    // Menu
     private static void imprimirOpcoes() {
         System.out.println("Escolha a Opção: ");
         System.out.println("1 >>> Cadastrar Pessoa");
@@ -60,16 +68,15 @@ public class Financeiro {
         System.out.println("6 >>> Consultar Dividas");
         System.out.println("7 >>> Sair");
     }
-
+    // Cadastro Pessoa
     private static void cadastrarPessoas(Scanner scanner) {
-
         System.out.println("Digite o Nome: ");
         String nome = scanner.next();
         System.out.println("Digite o Email: ");
         String email = scanner.next();
         Pessoas pessoa = new Pessoas(nome, email);
     }
-
+    // Cadastro Proventos pelo ID da Pessoa
     private static void cadastrarProventos(Scanner scanner) {
         System.out.println("Digite o Id da Pessoa: ");
         int idPessoa = scanner.nextInt();
@@ -84,9 +91,11 @@ public class Financeiro {
         double imposto = scanner.nextDouble();
         new Proventos(mes, ano, valor, pessoa, imposto);
     }
-
+    // Cadastro Dividas pelo ID da Pessoa
     private static void cadastrarDividas(Scanner scanner) {
-
+        System.out.println("Digite o Id da Pessoa: ");
+        int idPessoa = scanner.nextInt();
+        Pessoas pessoa = Pessoas.getPessoa(idPessoa);
         System.out.println("Digite o Mes: ");
         int mes = scanner.nextInt();
         System.out.println("Digite o Ano: ");
@@ -95,17 +104,24 @@ public class Financeiro {
         double valor = scanner.nextDouble();
         System.out.println("Digite o % do Imposto: ");
         double percDesconto = scanner.nextDouble();
-        //Dividas divida = new Dividas(mes, ano, ano, valor, percDesconto);
+        // new Dividas(mes, ano, ano, valor, percDesconto);
     }
-
+    // Consulta Pessoa
     private static void consultarPessoas(Scanner scanner) {
         Pessoas.getPessoas();
     }
-
+    // Consulta Dividas
     private static void consultarDividas(Scanner scanner) {
-        System.out.println("Digite o Id da Pessoa: ");
+        System.out.println("Digite o ID da Pessoa: ");
         int idPessoa = scanner.nextInt();
         Dividas.getDividas(idPessoa);
+    }
+
+    // Consulta Poventos
+    private static void consultarProventos(Scanner scanner) {
+        System.out.println("Digite o ID da Pessoa: ");
+        int idPessoa = scanner.nextInt();
+        Proventos.getProventos(idPessoa);
     }
 
 }

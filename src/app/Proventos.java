@@ -1,28 +1,44 @@
 package app;
 
-import java.util.Objects;
+//Biblioteca
+import java.util.Set;
 
+import app.dao.UsuarioDAO;
+
+// Classe Derivada da Classe-Pai
 public class Proventos extends Contas {
-
+    // Variável Privada (Uso Exclusivo da Classe)
     private double imposto;
 
-    /* Métodos / Construtores
-    + Proventos(id: int, mes: int, ano: int, valor: double, pessoa: Pessoas, imposto: double): Proventos 
-    + Proventos(mes: int, ano: int, valor: double, pessoa: Pessoas, imposto: double): Proventos 
-    + Proventos(idPessoa: int): Set<Proventos>
+    /* Construtores
+        + Proventos(id: int, mes: int, ano: int, valor: double, pessoa: Pessoas, imposto: double): Proventos 
+        + Proventos(mes: int, ano: int, valor: double, pessoa: Pessoas, imposto: double): Proventos 
+        + Proventos(idPessoa: int): Set<Proventos>
     */   
     public Proventos(int idConta, int mes, int ano, double valor, Pessoas pessoa, double imposto) {
+        // Variáveis de Herança da Classe-Pai
         super(idConta, mes, ano, valor, pessoa);
         this.imposto = imposto;
     }
-
     public Proventos(int mes, int ano, double valor, Pessoas pessoa, double imposto) {
         this(0, mes, ano, valor, pessoa, imposto);
     }
 
+    public static Set<Proventos> Provento(int idPessoa) {
+        // Select no banco e retornar o Set<Dividas>
+
+        return null;
+    }
+
+    public static void getProventos(int idPessoa){
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.getProventos(idPessoa);
+        dao.endConection();
+    }
+
     /* Métodos Get - Set
-    + getImposto(): double 
-    + setImposto(imposto: double): void
+        + getImposto(): double 
+        + setImposto(imposto: double): void
     */
     public Proventos(double imposto) {
         this.imposto = imposto;
@@ -31,7 +47,6 @@ public class Proventos extends Contas {
     public double getImposto() {
         return this.imposto;
     }
-
     public void setImposto(double imposto) {
         this.imposto = imposto;
     }
@@ -42,31 +57,18 @@ public class Proventos extends Contas {
     }
 
     /* Métodos Equals - Hashcode - ToString
-    + toString(): String 
-    - calculaImposto(): double
+        + toString(): String 
+        - calculaImposto(): double
     */
     @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Proventos)) {
-            return false;
-        }
-        Proventos proventos = (Proventos) o;
-        return imposto == proventos.imposto;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(imposto);
-    }
-
-    @Override
     public String toString() {
-        return "{" +
-            " imposto='" + getImposto() + "'" +
-            "}";
+        return 
+            "Imposto de " + getImposto() + " %\n" +
+            "Valor Com Imposto: " +
+            "-------------------------------------------";
     }
+
+    // Impressão dos Proventos da Pessoa
     public void imprimirProventos(){
         System.out.println("Cliente: " + this.getNomePessoa());
         System.out.println("Quantidade de Proventos: " + this.quantidadeDeProventos());
@@ -81,8 +83,7 @@ public class Proventos extends Contas {
         return 0;
     }
 
-    private void valorProventos(){
-        
+    private void valorProventos(){        
     }
 
     private String total() {

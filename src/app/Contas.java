@@ -1,11 +1,11 @@
 package app;
 
+// Biblioteca
 import java.util.Objects;
 
-// import java.util.Objects;
-
+// Classe-Pai
 public class Contas {
-
+    // Variáveis: "Herança" p/ as Classes Dividas e Proventos
     private int idConta;
     private int mes;
     private int ano;
@@ -130,14 +130,12 @@ public class Contas {
 
     @Override
     public String toString() {
-        return "{" +
-            " idConta='" + getIdConta() + "'" +
-            ", mes='" + getMes() + "'" +
-            ", ano='" + getAno() + "'" +
-            ", valor='" + getValor() + "'" +
-            ", pessoa='" + getPessoa() + "'" +
+        return 
+            "ID da Conta: " + getIdConta() + "\n" +
+            "Mes: " + getMes() + "\n" +
+            "Ano: " + getAno() + "\n" +
+            "Valor: " + getValor() + "\n" +
+            "Pessoa: " + getPessoa() + "\n" +
             "}";
-    }
-    
-
+    } 
 }

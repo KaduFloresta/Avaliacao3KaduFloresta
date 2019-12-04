@@ -1,16 +1,18 @@
 package app;
 
+//Biblioteca
 import java.util.Objects;
 
+//Biblioteca Interna
 import app.dao.UsuarioDAO;
 
 public class Pessoas {
-
+    // Variáveis Privadas (Uso da Classe)
     private int idPessoa;
     private String nomePessoa;
     private String emailPessoa;
 
-    /* Métodos / Construtores
+    /* Construtores
         + Pessoa(): Pessoas 
         + Pessoa(id: int): Pessoas 
         + Pessoa(id: int, nome: String, email: String): Pessoas 
@@ -34,17 +36,18 @@ public class Pessoas {
         this.nomePessoa = nomePessoa;
         this.emailPessoa = emailPessoa;
 
+        // Create Pessoa no BD
         UsuarioDAO dao = new UsuarioDAO();
         dao.adicionaPessoa(this);
         dao.endConection();        
     }
-
+    // Coletando "Relação de Pessoas" do BD
     public static void getPessoas(){
         UsuarioDAO dao = new UsuarioDAO();
         dao.getPessoas();
         dao.endConection();
     }
-
+    // Coletando "Pessoa" do BD
     public static Pessoas getPessoa(int idPessoa){
         UsuarioDAO dao = new UsuarioDAO();
         Pessoas pessoa = dao.getPessoa(idPessoa);
@@ -118,10 +121,12 @@ public class Pessoas {
 
     @Override
     public String toString() {
-        return "Id: " + getIdPessoa() + "\n" +
+        return 
+            "-------------------------------------------" +
+            "ID da Pessoa: " + getIdPessoa() + "\n" +
             "Nome: " + getNomePessoa() + "\n" +
             "Email:" + getEmailPessoa() + "\n" +
-            "------------------------------------";
+            "-------------------------------------------";
     }
     
 
