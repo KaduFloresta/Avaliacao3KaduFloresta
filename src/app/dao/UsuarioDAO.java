@@ -54,11 +54,12 @@ public class UsuarioDAO {
         try {
             // Statement p/Executar Instruções do SQL
             PreparedStatement stmt = connection.prepareStatement(sql1);
-            stmt.setInt(1,provento.getIdConta());
+            stmt.setInt(1,provento.getPessoa().getIdPessoa());
             stmt.setInt(2,provento.getMes());
             stmt.setInt(3,provento.getAno());
             stmt.setDouble(4,provento.getValor());            
             stmt.setDouble(5,provento.getImposto());
+            stmt.execute();
         // Tratamento de Exceção do SQL
         } catch (SQLException u) {
             throw new RuntimeException(u);
@@ -67,15 +68,16 @@ public class UsuarioDAO {
     // Cadastro de Dividas no BD
     public void adicionarDividas(Dividas divida){
         //Comando SQL p/ Coleta de Dados do BD
-        String sql2 = "INSERT INTO dividas (pessoas_id,mes,ano,valor,desconto) VALUES (?,?,?,?,?)";
+        String sql2 = "INSERT INTO dividas (pessoas_id,mes,ano,valor,percentual_desconto) VALUES (?,?,?,?,?)";
         try {
             // Statement p/Executar Instruções do SQL
             PreparedStatement stmt = connection.prepareStatement(sql2);
-            stmt.setInt(1, divida.getIdConta());            
+            stmt.setInt(1, divida.getPessoa().getIdPessoa());           
             stmt.setInt(2, divida.getMes());
             stmt.setInt(3, divida.getAno());
             stmt.setDouble(4, divida.getValor());
             stmt.setDouble(5, divida.getPercDesconto());
+            stmt.execute();
         // Tratamento de Exceção do SQL
         } catch (SQLException u) {
             throw new RuntimeException(u);
@@ -144,7 +146,7 @@ public class UsuarioDAO {
                     resultSet.getInt("ano"),
                     resultSet.getDouble("valor"),
                     pessoa,
-                    resultSet.getDouble("percDesconto"));
+                    resultSet.getDouble("percentual_desconto"));
 
                 System.out.println(divida.toString());
             }
@@ -155,7 +157,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    // Coletando Relação de Ptoventos Cadastrados no BD
+    // Coletando Relação de Proventos Cadastrados no BD
     public Pessoas getProventos(int idPessoa){
         //Comando SQL p/ Coleta de Dados do BD
         String sql = "SELECT * FROM proventos WHERE pessoas_id = " + idPessoa;

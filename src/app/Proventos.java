@@ -3,6 +3,7 @@ package app;
 //Biblioteca
 import java.util.Set;
 
+//Biblioteca Interna
 import app.dao.UsuarioDAO;
 
 // Classe Derivada da Classe-Pai
@@ -22,11 +23,15 @@ public class Proventos extends Contas {
     }
     public Proventos(int mes, int ano, double valor, Pessoas pessoa, double imposto) {
         this(0, mes, ano, valor, pessoa, imposto);
+
+        // Create Provento no BD
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.adicionarProventos(this);
+        dao.endConection();
     }
 
     public static Set<Proventos> Provento(int idPessoa) {
         // Select no banco e retornar o Set<Dividas>
-
         return null;
     }
 
@@ -64,7 +69,7 @@ public class Proventos extends Contas {
     public String toString() {
         return 
             "Imposto de " + getImposto() + " %\n" +
-            "Valor Com Imposto: " +
+            "Valor Com Imposto R$ : " +
             "-------------------------------------------";
     }
 

@@ -122,7 +122,7 @@ public class Pessoas {
     @Override
     public String toString() {
         return 
-            "-------------------------------------------" +
+            "-------------------------------------------\n" +
             "ID da Pessoa: " + getIdPessoa() + "\n" +
             "Nome: " + getNomePessoa() + "\n" +
             "Email:" + getEmailPessoa() + "\n" +

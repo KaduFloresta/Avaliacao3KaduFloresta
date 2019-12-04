@@ -23,11 +23,15 @@ public class Dividas extends Contas {
 
     public Dividas(int mes, int ano, double valor, Pessoas pessoa, double percDesconto) {
         this(0, mes, ano, valor, pessoa, percDesconto);
+         
+        // Create Divida no BD
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.adicionarDividas(this);
+        dao.endConection();
     }
 
     public static Set<Dividas> Divida(int idPessoa) {
         // Select no banco e retornar o Set<Dividas>
-
         return null;
     }
 
@@ -59,8 +63,8 @@ public class Dividas extends Contas {
     */ 
     @Override
     public String toString() {
-        return "Desconto na Dívida: " + getPercDesconto() + "\n" +
-        "Valor Com Desconto: " +
+        return "Desconto na Dívida: " + getPercDesconto() + " %\n" +
+        "Valor Com Desconto: R$ " +
         "-------------------------------------------";
     }
 

@@ -19,8 +19,10 @@ public class Financeiro {
         Connection connection = new ConnectionX().getConnection();
 
         // Impressão do Cabeçalho no Console
-        System.out.println("...:::[FINANCEIRO]:::...");
-        System.out.println("Escolha a Opção: ");
+        System.out.println("..::[==============]::..");
+        System.out.println("..::::[FINANCEIRO]::::..");
+        System.out.println("..::[==============]::..\n");
+        
         int opcao = 0;
         do {
             // Impressão do Menu
@@ -40,10 +42,10 @@ public class Financeiro {
                 consultarPessoas(scanner);
                 break;
             case 5:
-                consultarDividas(scanner);
+                consultarProventos(scanner);                
                 break;
             case 6:
-                consultarProventos(scanner);
+                consultarDividas(scanner);
                 break;
             case 7:
                 // Encerra do Menu
@@ -85,9 +87,9 @@ public class Financeiro {
         int mes = scanner.nextInt();
         System.out.println("Digite o Ano: ");
         int ano = scanner.nextInt();
-        System.out.println("Digite o Valor: ");
+        System.out.println("Digite o Valor: R$ ");
         double valor = scanner.nextDouble();
-        System.out.println("Digite o Imposto: ");
+        System.out.println("Digite a % do Imposto: ");
         double imposto = scanner.nextDouble();
         new Proventos(mes, ano, valor, pessoa, imposto);
     }
@@ -100,11 +102,11 @@ public class Financeiro {
         int mes = scanner.nextInt();
         System.out.println("Digite o Ano: ");
         int ano = scanner.nextInt();
-        System.out.println("Digite o Valor: ");
+        System.out.println("Digite o Valor: R$ ");
         double valor = scanner.nextDouble();
-        System.out.println("Digite o % do Imposto: ");
+        System.out.println("Digite o % da Divida: ");
         double percDesconto = scanner.nextDouble();
-        // new Dividas(mes, ano, ano, valor, percDesconto);
+        new Dividas(mes, ano, valor, pessoa, percDesconto);
     }
     // Consulta Pessoa
     private static void consultarPessoas(Scanner scanner) {
@@ -117,7 +119,7 @@ public class Financeiro {
         Dividas.getDividas(idPessoa);
     }
 
-    // Consulta Poventos
+    // Consulta Proventos
     private static void consultarProventos(Scanner scanner) {
         System.out.println("Digite o ID da Pessoa: ");
         int idPessoa = scanner.nextInt();
