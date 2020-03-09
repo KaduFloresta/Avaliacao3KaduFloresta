@@ -1,0 +1,39 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestaConexao",
+            "request": "launch",
+            "mainClass": "app.TestaConexao",
+            "projectName": "avaliacaotres"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - JButtonExemplo",
+            "request": "launch",
+            "mainClass": "app.JButtonExemplo",
+            "projectName": "avaliacaotres"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Interface",
+            "request": "launch",
+            "mainClass": "app.Interface",
+            "projectName": "avaliacaotres"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "app.App",
+            "projectName": "avaliacaotres"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Financeiro",
+            "request": "launch",
+            "mainClass": "app.Financeiro",
+            "projectName": "avaliacaotres"
+        }
+    ]
+}
